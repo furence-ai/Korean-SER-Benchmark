@@ -1,0 +1,42 @@
+# 스모크 설정 — run_smoke.sh 용. 작은 _smoke split + epochs 1 로 파이프라인 빠른 검증.
+# (default.yaml 과 동일 구조, 학습값만 축소)
+
+common:
+  dataset: emotion_style_speech
+  backbone: emotion2vec/emotion2vec_plus_large
+  head_type: official-frame-mlp
+  hidden_dim: 256
+  dropout: 0.2
+  keep_labels: [0, 1, 2, 6]
+  device: cuda
+  seed: 42
+  epochs: 1                        # ← 1 epoch
+  early_stop_patience: 0           # 1 epoch 라 비활성
+  num_workers: 4
+  weight_decay: 1.0e-5
+  label_smoothing: 0.05
+  use_class_weights: true
+  amp_dtype: bf16
+  manifest_dir: data/manifests
+  out_dir: checkpoints
+  eval_on_test: true
+  split:                           # ← 미니 subset
+    train: train_smoke
+    val: val_smoke
+    test: test_smoke
+
+acoustic:
+  full_ft_lr: 5.0e-5
+  full_ft_backbone_lr: 5.0e-6
+  head_lr: 5.0e-4
+  batch_size: 16
+  warmup_steps: 0                  # ← 스텝 적어 warmup 끔
+  grad_accum: 1
+  max_audio_sec: 10.0
+  freeze_cnn: false
+  freeze_first_n_layers: 0
+  gradient_checkpointing: false
+
+cached:
+  lr: 5.0e-4
+  batch_size: 64

@@ -1,0 +1,8 @@
+# 데이터셋 비코드 설정 (경로/태스크 등 — 코드는 ser/datasets/emotion_style_speech.py).
+# build_manifest 가 raw 디렉토리를 스캔할 때 쓰는 값. 다른 데이터셋은 configs/datasets/<id>.yaml 추가.
+#
+# data_root: 승인받아 내려받은 데이터셋 압축 해제 루트로 바꾸세요.
+#   그 아래에 Training/ · Validation/ 이 있고, 각각 원천데이터/<task>/... 구조여야 합니다.
+#   환경변수 SER_DATA_ROOT 또는 --data-root 로도 지정할 수 있고, 그쪽이 우선합니다.
+data_root: /path/to/emotion-style-speech       # ← 반드시 수정
+task: 1.감정                          # 원천데이터 하위 서브태스크 디렉토리

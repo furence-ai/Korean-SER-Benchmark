@@ -1,0 +1,71 @@
+{
+  "_readme": [
+    "Fingerprints of the reference splits. The repo ships no manifests: 「감성 및 발화 스타일별 음성합성 데이터」",
+    "terms forbid redistributing the data or derivatives. Regenerate the manifests",
+    "from your own approved copy of the dataset, then verify with:",
+    "  uv run python -m scripts.split_fingerprint --manifest-dir data/manifests \\",
+    "      --data-root <dataset root> --check data/SPLIT_CHECKSUMS.json",
+    "Matching hashes mean you hold the identical split and your numbers are",
+    "directly comparable to the published ones."
+  ],
+  "hash": "sha256 over sorted '<relpath>\\t<label>' lines; relpath is relative to the dataset root",
+  "generator": {
+    "manifest": "python -m scripts.build_manifest",
+    "split": "python -m scripts.make_disjoint_split --seed 42",
+    "seed": 42,
+    "note": "build_manifest walks the dataset in sorted() order and make_disjoint_split uses random.Random(seed), so regeneration is deterministic."
+  },
+  "label_space": {
+    "0": "happy",
+    "1": "sad",
+    "2": "angry",
+    "3": "anxious",
+    "4": "hurt",
+    "5": "embarrassed",
+    "6": "neutral"
+  },
+  "configs": {
+    "4class": {
+      "keep_labels": [
+        0,
+        1,
+        2,
+        6
+      ],
+      "manifest_dir": "data/manifests",
+      "config": "configs/default.yaml",
+      "splits": {
+        "train_di": {
+          "n": 190837,
+          "sha256": "1a121110165371c77ab4ce208e9260e8d34a44c7e8e6cf8f22b17f11955905a5",
+          "label_counts": {
+            "0": 49988,
+            "1": 44895,
+            "2": 47765,
+            "6": 48189
+          }
+        },
+        "val_di": {
+          "n": 2933,
+          "sha256": "777de151a53d59017779ffa07417eb9d5564624fc28b5652e112ee6622dcc0c6",
+          "label_counts": {
+            "0": 580,
+            "1": 804,
+            "2": 798,
+            "6": 751
+          }
+        },
+        "test_di": {
+          "n": 2451,
+          "sha256": "605da6a80d970d4ffc44e435d526ef5f518dd6fde8cba66f01328447a3d7ddf8",
+          "label_counts": {
+            "0": 586,
+            "1": 827,
+            "2": 629,
+            "6": 409
+          }
+        }
+      }
+    }
+  }
+}

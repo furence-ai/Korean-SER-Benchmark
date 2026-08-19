@@ -1,0 +1,36 @@
+[project]
+name = "korean-ser-benchmark"
+version = "0.1.0"
+license = "MIT"
+description = "Reproducible benchmark and fine-tuning framework for Korean speech emotion recognition"
+requires-python = ">=3.10,<3.12"
+dependencies = [
+    # emotion2vec 백본/head 추론 (funasr) — emotion2vec 프로젝트와 동일 제약
+    "torch>=2.2.0",
+    "torchaudio>=2.2.0",
+    "funasr>=1.1.0",
+    "modelscope>=1.15.0",
+    "huggingface-hub>=0.20.0",
+    "soundfile>=0.12.1",
+    "librosa>=0.10.1",
+    "numpy>=1.24,<2.0",
+    # transformers 5.x 는 torch>=2.7(float8) 요구 → cu121 torch 2.5.1 과 충돌. 4.x 로 고정.
+    "transformers>=4.44,<5",
+    # 혼동행렬/지표/플롯
+    "scikit-learn>=1.3.0",
+    "matplotlib>=3.7.0",
+]
+
+[tool.uv]
+package = false
+
+# torch는 CUDA 12.1 wheel 사용 (emotion2vec 프로젝트와 동일).
+# 다른 CUDA 버전이면 index URL 수정 (cu118, cu121, cu124). CPU 전용이면 이 블록 삭제.
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu121" }
+torchaudio = { index = "pytorch-cu121" }

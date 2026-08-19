@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[oc]
+*.egg-info/
+
+# uv / 가상환경
+.venv/
+
+# 로그 / OS noise
+logs/
+.DS_Store
+
+# ── 데이터셋 파생물은 절대 커밋하지 않는다 ────────────────────────────────
+# 이 데이터셋은 데이터 및 파생물의 제3자 제공을 금지한다. manifest 는 오디오
+# 경로와 화자 ID 를, transcript 는 원문 대본을 담으므로 둘 다 파생물이다.
+# 공개되는 것은 data/SPLIT_CHECKSUMS.json (해시만) 과 data/README.md 뿐.
+data/*
+!data/README.md
+!data/SPLIT_CHECKSUMS.json
+
+# 모델 체크포인트 / 학습 산출물
+checkpoints/
+runs/
+*.npz
+*.pt
+*.png
+
+# results/ 는 공개된 리더보드(커밋 대상)다. 학습 산출물은 전부 runs/ 로 간다.
+!results/**/cm/*.png
